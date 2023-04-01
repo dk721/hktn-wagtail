@@ -1,4 +1,4 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 
 {% load i18n %}
 {% load account socialaccount %}
@@ -9,7 +9,7 @@
 
     <div class="container mt-5 mb-5">
         <div class="row">
-            <div class="col-md-6 offset-md-3">
+            <div class="col-md-7 offset-md-3">
 
 
                 <h1>{% trans "Sign In" %}</h1>
@@ -17,7 +17,7 @@
                 {% get_providers as socialaccount_providers %}
 
                 {% if socialaccount_providers %}
-                <p>{% blocktrans with site.name as site_name %}Please sign in with one
+                <p allign="center">{% blocktrans with site.name as site_name %}Please sign in with one
                 of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
                 for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
