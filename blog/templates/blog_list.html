@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <style>
+        .post {
+            border: 1px solid #5993ad;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% for post in blog_posts %}
+    <div class="post">
+        <p>published: {{ post.created_date }}</p>
+        <h1><a href="">{{ post.title }}</a></h1>
+        <p>{{ post.text }}</p>
+    </div>
+{% endfor %}
+{% endblock %}
