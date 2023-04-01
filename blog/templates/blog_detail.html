@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ blog.title }}</h1>
+  <p>{{ blog.description }}</p>
+
+  {% if user.is_authenticated %}
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary">
+        {% if user in blog.participants.all %}
+          Leave Blog
+        {% else %}
+          Join Blog
+        {% endif %}
+      </button>
+    </form>
+  {% endif %}
+
+  <h2>Participants</h2>
+  <ul>
+    {% for participant in blog.participants.all %}
+      <li>{{ participant.username }}</li>
+    {% empty %}
+      <li>No participants yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

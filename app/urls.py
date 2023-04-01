@@ -31,6 +31,8 @@ urlpatterns = urlpatterns + [
     # the list:
     path('create/', views.create_blog_post, name='create_blog_post'),
     path('', views.blog_list, name="blog_list"),
+    path('blog_participate/', views.blog_participate, name='blog_participate'),
+    path('my_blogs/', views.my_blogs, name='my_blogs'),
     path('', include('allauth.urls')),
     path('', include(wagtail_urls)),
     # Alternatively, if you want Wagtail pages to be served from a subpath

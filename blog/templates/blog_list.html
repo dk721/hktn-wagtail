@@ -3,6 +3,9 @@
 {% block content %}
 <head>
     <style>
+        .p {
+            margin-bottom: 3px;
+        }
         .post {
             border: 1px solid #5993ad;
             padding: 10px;
@@ -10,12 +13,24 @@
         }
     </style>
 </head>
-Delete the line below if you're just getting started and want to remove the welcome screen!
+
 {% for post in blog_posts %}
     <div class="post">
-        <p>published: {{ post.created_date }}</p>
+        <p>Опубликовано: {{ post.created_date }}</p>
         <h1><a href="">{{ post.title }}</a></h1>
         <p>{{ post.text }}</p>
+        <p class="p">Начало: {{ post.start_date }}</p>
+        <p class="p">Конец: {{ post.end_date}}</p>
+        {% if user.is_authenticated %}
+            {% if user in post.participants.all %}
+                <button class="btn btn-danger">Не участвовать</button>
+            {% else %}
+            <form method="blog_participate/{{ blog.id }}/">
+                {% csrf_token %}
+                <button class="btn btn-success">Участвовать</button>
+            </form>
+        {% endif %}
+{% endif %}
     </div>
 {% endfor %}
 {% endblock %}

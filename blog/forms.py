@@ -4,7 +4,7 @@ from .models import BlogPost
 class BlogPostForm(forms.ModelForm):
     class Meta:
         model = BlogPost
-        fields = ('author', 'title', 'image', 'text', 'created_date', 'start_date', 'end_date')
+        fields = ('title', 'image', 'text', 'created_date', 'start_date', 'end_date')
 
     def clean_image(self):
         image = self.cleaned_data.get('image', False)

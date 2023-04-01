@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Мои блоги</h1>
+  {% if blog_posts %}
+    <ul>
+      {% for blog in blog_posts %}
+        <li>
+          <a href="{% url 'blog_participate' %}">{{ blog.title }}</a>
+          {% if participants|length > 0 %}
+            <ul>
+              {% for participant in participants.all %}
+                <li>{{ participant.username }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>У вас нет созданных блогов</p>
+  {% endif %}
+{% endblock %}

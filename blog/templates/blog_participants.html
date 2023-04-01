@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Участники блога</h1>
+    <ul>
+        {% participant in participants %}
+        <li>{{ participant.username }}</li>
+    {% empty %}
+        <p>Пока нет участников</p>
+        {% enfor %}
+    </ul>
+{% endblock %}
