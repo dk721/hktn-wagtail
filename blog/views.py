@@ -10,8 +10,12 @@ def blog_list(request):
 @login_required
 def blog_participate(request, blog_id):
     blog = get_object_or_404(Blog, id=blog_id)
-    blog.participants.add(request.user)
-    return redirect('blog_participate', blog_id=blog_id)
+    if request.user in blog.participants.all():
+        messages.warning(request, 'You have already participated in this blog.')
+    else:
+        blog.participants.add(request.user)
+        messages.success(request, 'You have successfully participated in this blog.')
+    return redirect('blog_detail', blog_id=blog.id)
 
 @login_required
 def blog_participants(request, blog_id):
@@ -20,17 +24,17 @@ def blog_participants(request, blog_id):
     return render(request, "blog_participants.html", {'blog': blog, 'participants': participants})
 
 
-@login_required
-def blog_detail(request, pk):
-    blog = Blog.objects.get(pk=pk)
-    if request.method == 'POST':
-        user = request.user
-        if user in blog.participants.all():
-            blog.participants.remove(user)
-        else:
-            blog.participants.add(user)
-        return redirect('blog_detail', pk=pk)
-    return render(request, 'blog_detail.html', {'blog': blog})
+# @login_required
+# def blog_detail(request, pk):
+#     blog = Blog.objects.get(pk=pk)
+#     if request.method == 'POST':
+#         user = request.user
+#         if user in blog.participants.all():
+#             blog.participants.remove(user)
+#         else:
+#             blog.participants.add(user)
+#         return redirect('blog_detail', pk=pk)
+#     return render(request, 'blog_detail.html', {'blog': blog})
 
 
 def my_blogs(request):
