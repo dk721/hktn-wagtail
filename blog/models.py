@@ -15,6 +15,7 @@ class BlogPost(models.Model):
     participants = models.ManyToManyField(User, related_name="blog_participants")
 
     def publish(self):
+        self.author = User
         self.created_date = timezone.now()
         self.save()
 

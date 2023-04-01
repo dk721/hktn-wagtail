@@ -24,17 +24,17 @@ def blog_participants(request, blog_id):
     return render(request, "blog_participants.html", {'blog': blog, 'participants': participants})
 
 
-# @login_required
-# def blog_detail(request, pk):
-#     blog = Blog.objects.get(pk=pk)
-#     if request.method == 'POST':
-#         user = request.user
-#         if user in blog.participants.all():
-#             blog.participants.remove(user)
-#         else:
-#             blog.participants.add(user)
-#         return redirect('blog_detail', pk=pk)
-#     return render(request, 'blog_detail.html', {'blog': blog})
+@login_required
+def blog_detail(request, pk):
+    blog = Blog.objects.get(pk=pk)
+    if request.method == 'POST':
+        user = request.user
+        if user in blog.participants.all():
+            blog.participants.remove(user)
+        else:
+            blog.participants.add(user)
+        return redirect('blog_detail', pk=pk)
+    return render(request, 'blog_detail.html', {'blog': blog})
 
 
 def my_blogs(request):
